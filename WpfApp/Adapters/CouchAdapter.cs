@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Data.OleDb;
 using System.Windows.Documents;
-using WpfApp.Config;
 using WpfApp.Const;
 using WpfApp.Models;
 
@@ -14,10 +13,14 @@ public static class CouchAdapter
     
     public static List<CouchModel> LoadCouches()
     {
-        
-        OleDbConnection myConn = new OleDbConnection(AppConfig.DATABASE_CONNECTION_STRING);  
+        // Подключение к базе данных
+        OleDbConnection myConn = new OleDbConnection(DatabaseConst.DATABASE_CONNECTION_STRING);  
         OleDbDataAdapter myCmd = new OleDbDataAdapter(_selectSql, myConn);  
+        
+        
         myConn.Open();  
+        
+        // Создаем объекты из базы данных
         DataSet dtSet = new DataSet();  
         myCmd.Fill(dtSet, DatabaseConst.TABLE_COUCH);
 
@@ -27,6 +30,7 @@ public static class CouchAdapter
         {
 
             result.Add(
+                // Создаем обьекты и добавляем их в список
                 new CouchModel
                 {
                     Id = Convert.ToInt32(row[DatabaseConst.COUCH_ID]),

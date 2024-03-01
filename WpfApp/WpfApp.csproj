@@ -6,10 +6,25 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Windows\ClientWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Windows\CreateEditClientWindow.cs">
+        <DependentUpon>CreateEditClientWindow.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,8 @@ namespace WpfApp.Const;
 
 public static class DatabaseConst
 {
+    public const string DATABASE_CONNECTION_STRING = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source = L:\\Projects\\Taska\\WpfApp\\WpfApp\\tess.accdb";
+    
     public static String TABLE_COUCH = "Тренеры";
     public static String COUCH_ID = "Код тренера";
     public static String COUCH_NAME = "ФИО";

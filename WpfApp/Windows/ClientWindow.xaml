@@ -1,0 +1,84 @@
+﻿<Window
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:WpfApp"
+      xmlns:Models="clr-namespace:WpfApp.Models" x:Class="WpfApp.ClientWindow"
+      mc:Ignorable="d"
+      Title="Клиенты"
+      Loaded="Window_Loaded" Background="#eff2f7" 
+        Width="900"
+        Height="500"
+        >
+
+    <Grid>
+
+        <!-- Пока что переносим поисковик в комент -->
+
+        <!-- Рамка поиска -->
+        <Label Content="Поиск:" HorizontalAlignment="Left" Margin="20,31,0,0" VerticalAlignment="Top" Width="79"  FontSize="20" FontWeight="Bold" Height="33" RenderTransformOrigin="0.506,0.829"/>
+
+        <!-- Указатели полей поиска -->
+        <Label Content="Имя клиента" HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <Label Content="Фамилия клиента" HorizontalAlignment="Left" Margin="239,14,0,0" VerticalAlignment="Top" Width="108" Height="26"/>
+        <Label Content="Номер телефона" HorizontalAlignment="Left" Margin="375,14,0,0" VerticalAlignment="Top" Width="112" Height="26"/>
+        <Label Content="ФИО тренера" HorizontalAlignment="Left" Margin="515,14,0,0" VerticalAlignment="Top" Width="86" Height="26"/>
+
+        <TextBox  x:Name="searchName" HorizontalAlignment="Left" Margin="104,40,0,0" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Top" Width="130" Height="24" Text="{Binding ClientName, Mode=TwoWay}"/>
+        <TextBox x:Name="searchForename" HorizontalAlignment="Left" Margin="239,40,0,0" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Top" Width="131" Height="24" Text="{Binding ClientForename, Mode=TwoWay}"/>
+        <TextBox x:Name="searchPhone" HorizontalAlignment="Left" Margin="375,40,0,0" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Top" Width="130" Height="24" Text="{Binding  ClientPhoneNumber, Mode=TwoWay}"/>
+
+
+        <ComboBox 
+            x:Name="CouchSelect" 
+            HorizontalAlignment="Left" 
+            Margin="515,40,0,0"
+            VerticalAlignment="Top" Width="204"
+            Height="24"
+            IsReadOnly="true"
+            ItemsSource="{Binding CouchList}" 
+            Text="{Binding SelectedItem, ElementName=CouchSelect}"
+            DisplayMemberPath="Name"/>
+
+        <!-- Кнопки поиска -->
+        <Button Content="Поиск" HorizontalAlignment="Left" Margin="724,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.387,-0.282" Width="73" Height="24" Click="SearchButton_OnClick" />
+        <Button Content="Очистить" HorizontalAlignment="Left" Margin="807,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.387,-0.282" Height="24" Width="73" Click="ClearSearch_OnClick"/>
+
+        <!-- Счетчик найденых клиентов -->
+        <Label x:Name="Clients" Content="Найденые клиенты:" HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+
+
+        <!-- Кнопки над списком создать очистить обновить -->
+        <Button HorizontalAlignment="Left" Margin="769,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.387,-0.282" Height="30" Width="111" Content="Создать" Click="ButtonAddNew_OnClick"/>
+
+        <!-- Список клиентов -->
+        <DataGrid  x:Name="clientJoinedModelList" IsReadOnly="True"  AutoGenerateColumns="False" Margin="20,119,20,25">
+
+            <DataGrid.Columns>
+                <!-- Столбики -->
+                <DataGridTextColumn Header="Код клиента" Width="*" FontWeight="Bold" Binding="{Binding ClientId}"/>
+                <DataGridTextColumn Header="Имя" Width="*" FontWeight="Bold" Binding="{Binding ClientName}"/>
+                <DataGridTextColumn Header="Фамилия" Width="*" FontWeight="Bold" Binding="{Binding ClientForename}"/>
+                <DataGridTextColumn Header="Номер телефона" Width="*" FontWeight="Bold" Binding="{Binding ClientPhoneNumber}"/>
+                <DataGridTextColumn Header="ФИО тренера" Width="*" FontWeight="Bold" Binding="{Binding CouchName}"/>
+                <!-- Кнопки изменить и удалить -->
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="EditButton_OnClick" Content="Изменить" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn   Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteButton_OnClick"  Content="Удалить"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

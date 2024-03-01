@@ -1,5 +1,6 @@
 ﻿namespace WpfApp.Models;
 
+
 public class ClientModel
 {
     public int Id { get; set; }
